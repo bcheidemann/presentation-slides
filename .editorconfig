@@ -1,0 +1,7 @@
+root = true
+
+[snippets/*]
+indent_size = 2
+
+[index.html]
+indent_size = 2
