@@ -1,126 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-		<meta name="description" content="TypeScript: Beyond the Basics (slides) - presentation on advanced typescript concepts" />
 
-    <title>TypeScript: Beyond the Basics</title>
-		<link rel="icon" type="image/png" href="https://www.heidemann.dev/favicon.png" />
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="description"
+		content="TypeScript: Beyond the Basics (slides) - presentation on advanced typescript concepts" />
 
-    <link rel="stylesheet" href="/dist/reset.css" />
-    <link rel="stylesheet" href="/dist/reveal.css" />
-    <link rel="stylesheet" href="/dist/theme/black.css" />
-    <link rel="stylesheet" href="/plugin/highlight/monokai.css" />
+	<title>TypeScript: Beyond the Basics</title>
+	<link rel="icon" type="image/png" href="https://www.heidemann.dev/favicon.png" />
 
-    <style>
-      /* Hide scrollbars on code snippets */
-      code::-webkit-scrollbar {
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides">
-        <section>
-          <h2>TypeScript</h2>
-          <h3>Beyond the basics 🚀</h3>
-        </section>
-        <section data-auto-animate>
-          <h2>Overview</h2>
-          <ul>
-            <li>What is the talk about? 🤔</li>
-            <li>My origin story 🦸‍♂️</li>
-            <li>What do you know now? 🙋‍♂️</li>
-            <li>What will you know at the end? 💡</li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>Overview</h2>
-          <ul>
-            <li>What is the talk about? 🤔</li>
-            <li style="list-style-type: none">
-              <ul>
-                <li>Showcasing lesser known features</li>
-                <li>Advanced TypeScript concepts</li>
-              </ul>
-            </li>
-            <li>My origin story 🦸‍♂️</li>
-            <li>What do you know now? 🙋‍♂️</li>
-            <li>What will you know at the end? 💡</li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>Overview</h2>
-          <ul>
-            <li>What is the talk about? 🤔</li>
-            <li>My origin story 🦸‍♂️</li>
-            <li style="list-style-type: none">
-              <ul>
-                <li>Why am I giving this presentation?</li>
-              </ul>
-            </li>
-            <li>What do you know now? 🙋‍♂️</li>
-            <li>What will you know at the end? 💡</li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>Overview</h2>
-          <ul>
-            <li>What is the talk about? 🤔</li>
-            <li>My origin story 🦸‍♂️</li>
-            <li>What do you know now? 🙋‍♂️</li>
-            <li style="list-style-type: none">
-              <ul>
-                <li>Superset of JavaScript</li>
-                <li>Static type analysis</li>
-                <li>Extends JavaScript with new features</li>
-              </ul>
-            </li>
-            <li>What will you know at the end? 💡</li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>Overview</h2>
-          <ul>
-            <li>What is the talk about? 🤔</li>
-            <li>My origin story 🦸‍♂️</li>
-            <li>What do you know now? 🙋‍♂️</li>
-            <li>What will you know at the end? 💡</li>
-            <li style="list-style-type: none">
-              <ul>
-                <li>One or two new features/tricks</li>
-                <li>When/why to use them</li>
-                <li>Whether you just wasted 20 minutes 😉</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h2>Declaration Merging</h2>
-          <img
-            src="/ts-beyond-the-basics/assets/icecream-cones-merging.webp"
-						alt="Two icecream cones merging"
-            style="
+	<link rel="stylesheet" href="/dist/reset.css" />
+	<link rel="stylesheet" href="/dist/reveal.css" />
+	<link rel="stylesheet" href="/dist/theme/black.css" />
+	<link rel="stylesheet" href="/plugin/highlight/monokai.css" />
+
+	<style>
+		/* Hide scrollbars on code snippets */
+		code::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>TypeScript</h2>
+				<h3>Beyond the basics 🚀</h3>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What is the talk about? 🤔</li>
+					<li>My origin story 🦸‍♂️</li>
+					<li>What do you know now? 🙋‍♂️</li>
+					<li>What will you know at the end? 💡</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What is the talk about? 🤔</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>Showcasing lesser known features</li>
+							<li>Advanced TypeScript concepts</li>
+						</ul>
+					</li>
+					<li>My origin story 🦸‍♂️</li>
+					<li>What do you know now? 🙋‍♂️</li>
+					<li>What will you know at the end? 💡</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What is the talk about? 🤔</li>
+					<li>My origin story 🦸‍♂️</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>Why am I giving this presentation?</li>
+						</ul>
+					</li>
+					<li>What do you know now? 🙋‍♂️</li>
+					<li>What will you know at the end? 💡</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What is the talk about? 🤔</li>
+					<li>My origin story 🦸‍♂️</li>
+					<li>What do you know now? 🙋‍♂️</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>Superset of JavaScript</li>
+							<li>Static type analysis</li>
+							<li>Extends JavaScript with new features</li>
+						</ul>
+					</li>
+					<li>What will you know at the end? 💡</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What is the talk about? 🤔</li>
+					<li>My origin story 🦸‍♂️</li>
+					<li>What do you know now? 🙋‍♂️</li>
+					<li>What will you know at the end? 💡</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>One or two new features/tricks</li>
+							<li>When/why to use them</li>
+							<li>Whether you just wasted 20 minutes 😉</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Declaration Merging</h2>
+				<img src="/ts-beyond-the-basics/assets/icecream-cones-merging.webp" alt="Two icecream cones merging" style="
               width: 300px;
               height: 192px;
               object-fit: cover;
               object-position: top;
-            "
-          />
-        </section>
-        <section>
-          <h3>Declaration</h3>
-          <quote>"A statement which introduces a name into the program"</quote>
-          <br />
-          <span style="font-size: 14px; opacity: 0.5">Chat GPT 2024</span>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+            " />
+			</section>
+			<section>
+				<h3>Declaration</h3>
+				<quote>"A statement which introduces a name into the program"</quote>
+				<br />
+				<span style="font-size: 14px; opacity: 0.5">Chat GPT 2024</span>
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers>
 							<script type="text/template">
 								interface User {
@@ -129,9 +125,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers="5-8|10|12-16">
 							<script type="text/template">
 								interface User {
@@ -153,9 +149,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers="5-8">
 							<script type="text/template">
 								interface User {
@@ -169,9 +165,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers="5-8">
 							<script type="text/template">
 								interface User {
@@ -185,9 +181,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers>
 							<script type="text/template">
 								interface User {
@@ -198,9 +194,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers="10-14">
 							<script type="text/template">
 								interface User {
@@ -220,10 +216,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section>Why?</section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section>Why?</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers>
 							<script type="text/template">
 								app.get(
@@ -235,9 +231,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers>
 							<script type="text/template">
 								app.get(
@@ -250,9 +246,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers>
 							<script type="text/template">
 								app.get(
@@ -265,9 +261,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers>
 							<script type="text/template">
 								app.get(
@@ -281,9 +277,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers="1-5|11">
 							<script type="text/template">
 								declare namespace Express {
@@ -302,10 +298,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section>What next?</section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section>What next?</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers>
 							<script type="text/template">
 								function Func() {
@@ -320,9 +316,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers="11-12">
 							<script type="text/template">
 								function Func() {
@@ -340,9 +336,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs typescript" data-trim data-line-numbers="1-3|5-13|15-22">
 							<script type="text/template">
 								function Modal(props) {
@@ -370,9 +366,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 				<code style="min-height: 500px;" class="hljs typescript" data-trim data-line-numbers>
 						<script type="text/template">
 							enum Color {
@@ -396,9 +392,9 @@
 						</script>
 					</code>
 				</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 				<code style="min-height: 500px;" class="hljs typescript" data-trim data-line-numbers="20">
 						<script type="text/template">
 							enum Color {
@@ -424,21 +420,16 @@
 						</script>
 					</code>
 				</pre>
-        </section>
-        <section>And the best part...</section>
-        <section data-auto-animate>
-          <span data-id="code-declaration-merging-title"
-            >Instant legacy code! Just run
-            <span
-              style="
+			</section>
+			<section>And the best part...</section>
+			<section data-auto-animate>
+				<span data-id="code-declaration-merging-title">Instant legacy code! Just run
+					<span style="
                 background: rgb(49, 50, 48);
                 padding-inline: 8px;
                 border-radius: 16px;
-              "
-              >tsc</span
-            >!</span
-          >
-          <pre data-id="code-declaration-merging">
+              ">tsc</span>!</span>
+				<pre data-id="code-declaration-merging">
 		  			<code style="min-height: 530px;" class="hljs javascript" data-trim data-line-numbers="|1">
 							<script type="text/template">
 								var Color;
@@ -463,20 +454,18 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section>
-          <h2>🙋‍♂️</h2>
-        </section>
-        <section>
-          <h2>Branded Types</h2>
-          <img
-            src="/ts-beyond-the-basics/assets/nice-underlined.webp"
-						alt="A piece of paper with the word 'nice' written on it being underlined with a yellow marker"
-            style="width: 300px"
-          />
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section>
+				<h2>🙋‍♂️</h2>
+			</section>
+			<section>
+				<h2>Branded Types</h2>
+				<img src="/ts-beyond-the-basics/assets/nice-underlined.webp"
+					alt="A piece of paper with the word 'nice' written on it being underlined with a yellow marker"
+					style="width: 300px" />
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								const ingressSecurityGroup = new ec2.SecurityGroup(...);
@@ -484,9 +473,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="4-8">
 							<script type="text/template">
 								const ingressSecurityGroup = new ec2.SecurityGroup(...);
@@ -500,9 +489,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="|23">
 							<script type="text/template">
 								const ingressSecurityGroup = new ec2.SecurityGroup(...);
@@ -531,15 +520,15 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section>Did we use the right security group?</section>
-        <section>
-          <h2>No!</h2>
-          (And TypeScript didn't catch our mistake 😢)
-        </section>
-        <section data-auto-animate>
-          <h2>What is a branded type?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section>Did we use the right security group?</section>
+			<section>
+				<h2>No!</h2>
+				(And TypeScript didn't catch our mistake 😢)
+			</section>
+			<section data-auto-animate>
+				<h2>What is a branded type?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								const ingressSecurityGroup = new ec2.SecurityGroup(...);
@@ -549,10 +538,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>What is a branded type?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>What is a branded type?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="|16-18">
 							<script type="text/template">
 								const ingressSecurityGroup =
@@ -588,9 +577,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								const IngressSecurityGroup =
@@ -600,9 +589,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="6-11">
 							<script type="text/template">
 								const IngressSecurityGroup =
@@ -619,9 +608,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="1-2">
 							<script type="text/template">
 								const ingressSecurityGroup = new ec2.SecurityGroup(...);
@@ -650,9 +639,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="1-6|9">
 							<script type="text/template">
 								const ingressSecurityGroup = IngressSecurityGroup.of(
@@ -685,9 +674,9 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="9|26-27">
 							<script type="text/template">
 								const ingressSecurityGroup = IngressSecurityGroup.of(
@@ -720,31 +709,28 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section>
-          <h2>Success! 🥳</h2>
-        </section>
-        <section>
-          <h2>🙋‍♂️</h2>
-        </section>
-        <section>
-          <h2>any, unknown and never</h2>
-          <img
-            src="/ts-beyond-the-basics/assets/charlie-confused.webp"
-						alt="Charlie from 'It's Always Sunny in Philadelphia' rubbing his temple"
-            style="width: 300px"
-          />
-        </section>
-        <section>
-          <h2>Foundational Concepts</h2>
-          <ul>
-            <li>Narrow and wide types</li>
-            <li>Type compatibility</li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>Narrow vs. wide wypes</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section>
+				<h2>Success! 🥳</h2>
+			</section>
+			<section>
+				<h2>🙋‍♂️</h2>
+			</section>
+			<section>
+				<h2>any, unknown and never</h2>
+				<img src="/ts-beyond-the-basics/assets/charlie-confused.webp"
+					alt="Charlie from 'It's Always Sunny in Philadelphia' rubbing his temple" style="width: 300px" />
+			</section>
+			<section>
+				<h2>Foundational Concepts</h2>
+				<ul>
+					<li>Narrow and wide types</li>
+					<li>Type compatibility</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Narrow vs. wide wypes</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="1-2|4-5">
 							<script type="text/template">
 								type Narrow = "a" | "b";
@@ -755,10 +741,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>Narrow vs. wide wypes</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>Narrow vs. wide wypes</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="7-9">
 							<script type="text/template">
 								type Narrow = "a" | "b";
@@ -773,10 +759,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>Narrow vs. wide wypes</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>Narrow vs. wide wypes</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="11-12|14-15|16-20">
 							<script type="text/template">
 								type Narrow = "a" | "b";
@@ -802,29 +788,29 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>Narrow vs. wide wypes</h2>
-          <ul>
-            <li>
-              Any & Unknown
-              <ul style="opacity: 0.5">
-                <li>Widest possible type</li>
-                <li>Anything can be assigned to them</li>
-              </ul>
-            </li>
-            <li>
-              Never
-              <ul style="opacity: 0.5">
-                <li>Narrowest possible type</li>
-                <li>Nothing can be assigned to it</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>Type compatibility</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>Narrow vs. wide wypes</h2>
+				<ul>
+					<li>
+						Any & Unknown
+						<ul style="opacity: 0.5">
+							<li>Widest possible type</li>
+							<li>Anything can be assigned to them</li>
+						</ul>
+					</li>
+					<li>
+						Never
+						<ul style="opacity: 0.5">
+							<li>Narrowest possible type</li>
+							<li>Nothing can be assigned to it</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Type compatibility</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="1-2|4-6|8-9|11-14|16-17">
 							<script type="text/template">
 								type Narrow = "a" | "b";
@@ -847,20 +833,20 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "any"?</h2>
-          <ul style="list-style-type: none">
-            <li>✅ Non-production code (e.g. prototype or PoC)</li>
-            <li>✅ Within a well defined boundary</li>
-            <li>✅ When type safety is difficult or impossible</li>
-            <li>❌ When you don't know the type</li>
-            <li>❌ As a function parameter or return</li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>Consider other options</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "any"?</h2>
+				<ul style="list-style-type: none">
+					<li>✅ Non-production code (e.g. prototype or PoC)</li>
+					<li>✅ Within a well defined boundary</li>
+					<li>✅ When type safety is difficult or impossible</li>
+					<li>❌ When you don't know the type</li>
+					<li>❌ As a function parameter or return</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Consider other options</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								function getUser(id: string) {
@@ -872,10 +858,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>Consider other options</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>Consider other options</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								const UserDataSchema = z.object({
@@ -892,17 +878,17 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "unknown"?</h2>
-          <ul style="list-style-type: none">
-            <li>✅ When you don't know the type</li>
-            <li>✅ As a function parameter or return</li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "unknown"?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "unknown"?</h2>
+				<ul style="list-style-type: none">
+					<li>✅ When you don't know the type</li>
+					<li>✅ As a function parameter or return</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "unknown"?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								function parseUserData(userData: any) {
@@ -918,10 +904,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "unknown"?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "unknown"?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								function parseUserData(userData: unknown): UserData | null {
@@ -941,10 +927,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "unknown"?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "unknown"?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								const UserDataSchema = z.object({
@@ -962,23 +948,23 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section>
-          <h2>TLDR;</h2>
-          Use "unknown" any time you would use "any" - unless you have a good
-          reason not to.
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "never"?</h2>
-          <ul style="list-style-type: none">
-            <li>✅ Complex generics</li>
-            <li>✅ Exhaustivness checking</li>
-            <li>✅ Functions that don't return</li>
-          </ul>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "never"?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section>
+				<h2>TLDR;</h2>
+				Use "unknown" any time you would use "any" - unless you have a good
+				reason not to.
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "never"?</h2>
+				<ul style="list-style-type: none">
+					<li>✅ Complex generics</li>
+					<li>✅ Exhaustivness checking</li>
+					<li>✅ Functions that don't return</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "never"?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								type NonNullable<T> =
@@ -988,10 +974,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "never"?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "never"?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="|1">
 							<script type="text/template">
 								type Color = "red" | "blue";
@@ -1008,10 +994,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "never"?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "never"?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers="1|9-10|">
 							<script type="text/template">
 								type Color = "red" | "blue" | "green";
@@ -1029,10 +1015,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "never"?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "never"?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								function panic(message: string): never {
@@ -1043,10 +1029,10 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section data-auto-animate>
-          <h2>When to use "never"?</h2>
-          <pre data-id="code-declaration-merging">
+			</section>
+			<section data-auto-animate>
+				<h2>When to use "never"?</h2>
+				<pre data-id="code-declaration-merging">
 		  			<code class="hljs javascript" data-trim data-line-numbers>
 							<script type="text/template">
 								function runGameLoop(): never {
@@ -1059,82 +1045,130 @@
 							</script>
 					  </code>
 					</pre>
-        </section>
-        <section>
-          <h2>🙋‍♂️</h2>
-        </section>
-        <section>
-          <h2>Conclusion</h2>
-          <ul>
-            <li>Declaration Merging</li>
-            <li>Branded Types</li>
-            <li>Any, Unknown and Never</li>
-          </ul>
-        </section>
-        <section>
-          <h2>Thank You! ❤️</h2>
-        </section>
-        <section>
-          <h2>Further Reading</h2>
-          <ul>
-            <li>
-              Articles
-              <ul>
-                <li>
-                  <a
-                    href="https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types"
-                    >Intersection Types</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html"
-                    >Declaration Merging</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://egghead.io/blog/using-branded-types-in-typescript"
-                    >Branded Types in TypeScript</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html"
-                    >Type Compatibility</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html"
-                    >Type Narrowing</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li>
-              Tools
-              <ul>
-                <li>
+			</section>
+			<section>
+				<h2>🙋‍♂️</h2>
+			</section>
+			<section>
+				<h2>Conclusion</h2>
+				<ul>
+					<li>Declaration Merging</li>
+					<li>Branded Types</li>
+					<li>Any, Unknown and Never</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Thank You! ❤️</h2>
+			</section>
+			<section style="position: relative;">
+				<h2>Further Reading</h2>
+				<style>
+					.presentation-qr {
+						display: none;
+					}
+
+					@media screen and (min-width: 768px) {
+						ul {
+							font-size: 1.25rem;
+						}
+
+						img.presentation-qr {
+							display: inline;
+							margin: unset;
+						}
+
+						.further-reading-content {
+							display: flex;
+							justify-content: center;
+							column-gap: 2rem;
+						}
+					}
+				</style>
+				<div class="further-reading-content">
+					<ul>
+						<li>
+							Articles
+							<ul>
+								<li>
+									<a href="https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types">Intersection
+										Types</a>
+								</li>
+								<li>
+									<a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">Declaration
+										Merging</a>
+								</li>
+								<li>
+									<a href="https://egghead.io/blog/using-branded-types-in-typescript">Branded Types in TypeScript</a>
+								</li>
+								<li>
+									<a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html">Type Compatibility</a>
+								</li>
+								<li>
+									<a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">Type Narrowing</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							Tools
+							<ul>
+								<li>
 									<a href="https://zod.dev/">Zod</a> (runtime type checking)
-                </li>
+								</li>
 								<li>
 									<a href="https://revealjs.com/">Reveal.js</a> (presentation framework)
 								</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-      </div>
-    </div>
+							</ul>
+						</li>
+					</ul>
+					<div>
+						<figure>
+							<img class="presentation-qr" src="/ts-beyond-the-basics/assets/presentation-qr.webp"
+								alt="QR code for the presentation" width="77" height="77" />
+							<figcaption style="font-size: 0.75rem; width: 100px;">
+								<span class="presentation-qr-point" style="font-size: 1.5rem;">👆</span>
+								<style>
+									.presentation-qr-point {
+										animation: bounce 4s infinite ease-in-out;
+										display: block;
+									}
 
-    <script src="/dist/reveal.js"></script>
-    <script src="/plugin/highlight/highlight.js"></script>
-    <script>
-      Reveal.initialize({
-        hash: true,
-        plugins: [RevealHighlight],
-      });
-    </script>
-  </body>
+									@keyframes bounce {
+
+										0%,
+										80% {
+											transform: translateY(0);
+										}
+										85% {
+											transform: translateY(-5px);
+										}
+										90% {
+											transform: translateY(2.5px);
+										}
+										95% {
+											transform: translateY(-5px);
+										}
+										100% {
+											transform: translateY(0px);
+										}
+									}
+								</style>
+								Scan me to view slides!
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="/dist/reveal.js"></script>
+	<script src="/plugin/highlight/highlight.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			plugins: [RevealHighlight],
+		});
+	</script>
+</body>
+
 </html>
