@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="description"
+		content="TypeScript: Beyond the Basics (slides) - presentation on advanced typescript concepts" />
+
+	<title>Rendering Strategies: A Brief History</title>
+	<link rel="icon" type="image/png" href="https://www.heidemann.dev/favicon.png" />
+
+	<link rel="stylesheet" href="/dist/reset.css" />
+	<link rel="stylesheet" href="/dist/reveal.css" />
+	<link rel="stylesheet" href="/dist/theme/black.css" />
+	<link rel="stylesheet" href="/plugin/highlight/monokai.css" />
+
+	<style>
+		/* Hide scrollbars on code snippets */
+		code::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>Rendering Strategies</h2>
+				<h3>🎨 A Brief History 💻</h3>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li>What do you know now? 🤷‍♂️</li>
+					<li>What will we cover? 💡</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>History of the web</li>
+							<li>Rendering strategies</li>
+							<li>Mobile apps?</li>
+						</ul>
+					</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li>What do you know now? 🤷‍♂️</li>
+					<li>What will we cover? 💡</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>Industry is moving faster than ever</li>
+							<li>Recent innovations not widely understood</li>
+						</ul>
+					</li>
+					<li>What do you know now? 🤷‍♂️</li>
+					<li>What will we cover? 💡</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li>What do you know now? 🤷‍♂️</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>HTML, CSS and JS</li>
+							<li>Servers, clients and CDNs</li>
+							<li>Server and client side rendering (SSR & CSR)?</li>
+						</ul>
+					</li>
+					<li>What will we cover? 💡</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li>What do you know now? 🤷‍♂️</li>
+					<li>What will we cover? 💡</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>History of rendering for the web</li>
+							<li>Comparison of modern techniques</li>
+							<li>Possible future innovations</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-0.svg" alt="Timeline" />
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-1.svg" alt="Timeline" />
+				<ul>
+					<li>WWW Invented 1989</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-2.svg" alt="Timeline" />
+				<ul>
+					<li>Server rendering (without hydration)</li>
+					<li>Common Gateway Interface (1993)</li>
+					<li>Use of C, Perl, Shell Script, etc</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-3.svg" alt="Timeline" />
+				<ul>
+					<li>JavaScript Created (1995)</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-4.svg" alt="Timeline" />
+				<ul>
+					<li>JQuery announced (2005)</li>
+					<li>JQuery released (2006)</li>
+					<li>First client side rendering framework</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-5.svg" alt="Timeline" />
+				<ul>
+					<li>CSR gains traction with rise of JQuery</li>
+					<li>Knockout.js, Backbone.js, AngularJS (2010)</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-6.svg" alt="Timeline" />
+				<ul>
+					<li>Static site generators gain popularity</li>
+					<li>Jekyll (2008)</li>
+					<li>Hugo (2013)</li>
+					<li>Gatsby (2015)</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-7.svg" alt="Timeline" />
+				<ul>
+					<li>React released (2013)</li>
+					<li>First fully declarative UI library</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-8.svg" alt="Timeline" />
+				<ul>
+					<li>React v16 released (2017)</li>
+					<li>Introduction of client side hydration</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-9.svg" alt="Timeline" />
+				<ul>
+					<li>React announces server components (2020)</li>
+					<li>NextJS announces experimental RSC support (2021)</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Timeline</h2>
+				<h3>Evolution of The Web</h3>
+				<img data-id="timeline" src="/rendering-strategies--a-brief-history/assets/timeline-10.svg" alt="Timeline" />
+			</section>
+			<section>
+				<h2>The Modern Web</h2>
+				<ul>
+					<li>Client Side Rendering</li>
+					<li>Server Side Rendering w/ hydration/li>
+					<li>Static Site Generation w/ hydration</li>
+					<li>Server Components</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Recap: Servers, Clients, CDNs</h2>
+				<img src="/rendering-strategies--a-brief-history/assets/servers-and-clients.svg" alt="Servers and Clients"
+					width="400px" />
+				<aside class="notes">
+					<ul>
+						<li>Web is a collection of interconnected computers</li>
+						<li>We call some computers servers, and others clients</li>
+						<li>Servers "serve" content</li>
+						<li>Clients display content</li>
+						<li>End users interact with clients</li>
+						<li>We have CDNs which are fast servers for static content</li>
+					</ul>
+				</aside>
+			</section>
+			<section data-auto-animate>
+				<h2>An Example UI</h2>
+				<img data-id="example-ui" src="/rendering-strategies--a-brief-history/assets/mock-ui-0.png" alt="Mock UI"
+					width="600" />
+			</section>
+			<section data-auto-animate>
+				<h2>An Example UI</h2>
+				<h3 data-id="subtitle">Static Content</h3>
+				<img data-id="example-ui" src="/rendering-strategies--a-brief-history/assets/mock-ui-1.png" alt="Mock UI"
+					width="600" />
+			</section>
+			<section data-auto-animate>
+				<h2>An Example UI</h2>
+				<h3 data-id="subtitle">Dynamic Content <span data-id="label">(Profile)</span></h3>
+				<img data-id="example-ui" src="/rendering-strategies--a-brief-history/assets/mock-ui-2.png" alt="Mock UI"
+					width="600" />
+			</section>
+			<section data-auto-animate>
+				<h2>An Example UI</h2>
+				<h3 data-id="subtitle">Dynamic Content <span data-id="label">(Article)</span></h3>
+				<img data-id="example-ui" src="/rendering-strategies--a-brief-history/assets/mock-ui-3.png" alt="Mock UI"
+					width="600" />
+			</section>
+			<section data-auto-animate>
+				<h2>An Example UI</h2>
+				<h3 data-id="subtitle">Dynamic Content <span data-id="label">(Comments)</span></h3>
+				<img data-id="example-ui" src="/rendering-strategies--a-brief-history/assets/mock-ui-4.png" alt="Mock UI"
+					width="600" />
+			</section>
+			<section data-auto-animate>
+				<h2>An Example UI</h2>
+				<img data-id="example-ui" src="/rendering-strategies--a-brief-history/assets/mock-ui-5.png" alt="Mock UI"
+					width="600" />
+			</section>
+			<section data-auto-animate>
+				<h2>Client Side Rendering</h2>
+				<img data-id="architecture" src="/rendering-strategies--a-brief-history/assets/strategy-csr.svg"
+					alt="Client Side Rendering" />
+			</section>
+			<section data-auto-animate>
+				<h2>Static Site Generation</h2>
+				<img data-id="architecture" src="/rendering-strategies--a-brief-history/assets/strategy-ssg.svg"
+					alt="Static Site Generation" />
+			</section>
+			<section data-auto-animate>
+				<h2>Server Side Rendering</h2>
+				<img data-id="architecture" src="/rendering-strategies--a-brief-history/assets/strategy-ssr.svg"
+					alt="Server Side Rendering" />
+			</section>
+			<section data-auto-animate>
+				<h2>Server Components</h2>
+				<img data-id="architecture" src="/rendering-strategies--a-brief-history/assets/strategy-sc.svg"
+					alt="Server Components" />
+			</section>
+			<section>
+				<h2>The Future?</h2>
+				<h3>🤷‍♂️</h3>
+			</section>
+			<section data-auto-animate>
+				<h2>Resumability?</h2>
+				<img src="/rendering-strategies--a-brief-history/assets/qwik-resumability.webp" alt="Qwik Resumability"
+					width="500" />
+			</section>
+			<section data-auto-animate>
+				<h2>Resumability?</h2>
+				<img src="/rendering-strategies--a-brief-history/assets/qwik-resumability.webp" alt="Qwik Resumability"
+					width="500" />
+				<pre data-id="code-declaration-merging">
+					<code class="hljs html" data-trim data-line-numbers>
+						<script type="text/template">
+							<button on:click="./chunk.js#handler_symbol">
+								click me
+							</button>
+						</script>
+					</code>
+				</pre>
+			</section>
+			<section data-auto-animate>
+				<h2>Server Components</h2>
+				<h3>for Mobile?</h3>
+				<ul>
+					<li>React Native</li>
+					<li>Possible use cases
+						<ul>
+							<li>Dyanmic content</li>
+							<li>Promotions / banners</li>
+							<li>Built with native components</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Thank You! ❤️</h2>
+			</section>
+			<section style="position: relative;">
+				<h2>Further Reading</h2>
+				<style>
+					.presentation-qr {
+						display: none;
+					}
+
+					@media screen and (min-width: 768px) {
+						ul {
+							font-size: 1.25rem;
+						}
+
+						img.presentation-qr {
+							display: inline;
+							margin: unset;
+						}
+
+						.further-reading-content {
+							display: flex;
+							justify-content: center;
+							column-gap: 2rem;
+						}
+					}
+				</style>
+				<div class="further-reading-content">
+					<ul>
+						<li>
+							Articles
+							<ul>
+								<li>
+									<a href="https://vercel.com/blog/understanding-react-server-components">
+										Vercel - Understanding React Server Components</a>
+								</li>
+								<li>
+									<a href="https://qwik.dev/docs/concepts/resumable">
+										Qwik - Resumability vs. Hydration</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							Tools
+							<ul>
+								<li>
+									<a href="https://revealjs.com/">Reveal.js</a> (presentation framework)
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<div>
+						<figure>
+							<img class="presentation-qr" src="/rendering-strategies--a-brief-history/assets/presentation-qr.png"
+								alt="QR code for the presentation" width="77" height="77" />
+							<figcaption style="font-size: 0.75rem; width: 100px;">
+								<span class="presentation-qr-point" style="font-size: 1.5rem;">👆</span>
+								<style>
+									.presentation-qr-point {
+										animation: bounce 4s infinite ease-in-out;
+										display: block;
+									}
+
+									@keyframes bounce {
+
+										0%,
+										80% {
+											transform: translateY(0);
+										}
+
+										85% {
+											transform: translateY(-5px);
+										}
+
+										90% {
+											transform: translateY(2.5px);
+										}
+
+										95% {
+											transform: translateY(-5px);
+										}
+
+										100% {
+											transform: translateY(0px);
+										}
+									}
+								</style>
+								Scan me to view slides!
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			</section>
+			<section>
+				<h2>Resources</h2>
+				<ul>
+				</ul>
+			</section>
+		</div>
+	</div>
+
+	<script src="/dist/reveal.js"></script>
+	<script src="/plugin/highlight/highlight.js"></script>
+	<script src="/plugin/notes/notes.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			plugins: [RevealHighlight, RevealNotes],
+		});
+	</script>
+</body>
+
+</html>
