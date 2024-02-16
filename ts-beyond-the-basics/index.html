@@ -1063,7 +1063,7 @@
 			<section style="position: relative;">
 				<h2>Further Reading</h2>
 				<style>
-					.presentation-qr {
+					figure.presentation-qr {
 						display: none;
 					}
 
@@ -1072,7 +1072,11 @@
 							font-size: 1.25rem;
 						}
 
-						img.presentation-qr {
+						figure.presentation-qr {
+							display: block;;
+						}
+
+						figure.presentation-qr img {
 							display: inline;
 							margin: unset;
 						}
@@ -1121,8 +1125,8 @@
 						</li>
 					</ul>
 					<div>
-						<figure>
-							<img class="presentation-qr" src="/ts-beyond-the-basics/assets/presentation-qr.webp"
+						<figure class="presentation-qr">
+							<img src="/ts-beyond-the-basics/assets/presentation-qr.webp"
 								alt="QR code for the presentation" width="77" height="77" />
 							<figcaption style="font-size: 0.75rem; width: 100px;">
 								<span class="presentation-qr-point" style="font-size: 1.5rem;">👆</span>
