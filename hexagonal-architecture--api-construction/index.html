@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="description"
+		content="Hexagonal Architecture: API Construction (slides) - implementation walkthrough of the hexagonal architecture in TypeScript" />
+
+	<title>Hexagonal Architecture: API Construction</title>
+	<link rel="icon" type="image/png" href="https://www.heidemann.dev/favicon.png" />
+
+	<link rel="stylesheet" href="/dist/reset.css" />
+	<link rel="stylesheet" href="/dist/reveal.css" />
+	<link rel="stylesheet" href="/dist/theme/black.css" />
+	<link rel="stylesheet" href="/plugin/highlight/monokai.css" />
+
+	<style>
+		/* Hide scrollbars on code snippets */
+		code::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>Hexagonal Architecture</h2>
+				<h3>👷 API Construction 🔨</h3>
+			</section>
+			<section>
+				<img height="180px" src="./assets/cat.jpg" alt="Eddie the cat">
+				<h2>The Cats API</h2>
+				<ul>
+					<li>A user can add a cat via the POST /cat endpoint</li>
+					<li>Every cat must have an owner</li>
+					<li>The ID of the cat should be returned from POST /cat</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<img height="600px" data-id="original-code" src="./assets/original-code.png">
+			</section>
+			<section data-auto-animate>
+				<img height="600px" data-id="original-code" src="./assets/original-code-highlighted.png">
+				<ul style="list-style: none; display: flex; font-size: 16px; font-weight: bold; justify-content: center; gap: 1rem;">
+					<li style="color: rgb(62, 114, 114);">Dependencies</li>
+					<li style="color: rgb(114, 62, 62);">Error Handling</li>
+					<li style="color: rgb(62, 114, 62);">Request Validation</li>
+				</ul>
+				<ul style="list-style: none; display: flex; font-size: 16px; font-weight: bold; justify-content: center; gap: 1rem;">
+					<li style="color: rgb(62, 62, 114);">Response Formation</li>
+					<li style="color: rgb(114, 62, 114);">Business Logic</li>
+					<li style="color: rgb(114, 114, 62);">Database</li>
+				</ul>
+			</section>
+			<section>
+				<h2>New Requirements</h2>
+				<ul>
+					<li>The integrations team is working with cat shelters</li>
+					<li>They will publish new cats to an event bus</li>
+					<li>These must be stored in the DB</li>
+					<li>These the same business logic applies</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Soultions</h2>
+				<img height="400px" src="./assets/refactor-vs-copy-paste-meme.png" alt="Meme of Drake looking disapproving at refactoring and approving at copy-pasting">
+			</section>
+			<section>
+				<h2>Introducing... 🥁</h2>
+				<h3>Hexagonal Architecture</h3>
+				<img height="200px" src="./assets/hero.webp" alt="Hero">
+			</section>
+			<section>
+				<pre data-id="code-declaration-merging">
+					<code class="hljs javascript" data-trim data-line-numbers="4-9|11-32|12-16|18-31">
+						<script type="text/template">
+							export class NewCatAPIGatewayController extends APIGatewayController {
+								private newCatService!: INewCatService;
+							
+								public validateRequest(event: APIGatewayProxyEventV2): NewCatRequest {
+									if (!event.body) {
+										throw new Error('No body provided');
+									}
+									return NewCatRequestSchema.parse(JSON.parse(event.body));
+								}
+							
+								public async handleRequest(event: NewCatRequest): Promise<APIGatewayProxyStructuredResultV2> {
+									const result = await this.newCatService.createCat(
+										event.owner.id,
+										event.cat.name,
+										event.cat.breed
+									);
+							
+									switch (result.kind) {
+										case 'CatNotFound':
+											return {
+												statusCode: 400,
+												body: JSON.stringify({ message: 'Invalid owner' }),
+											};
+										case 'CatCreated':
+											return {
+												statusCode: 200,
+												body: JSON.stringify(result.cat),
+											};
+										default:
+											exhaustiveCheck(result);
+									}
+								}
+							}
+						</script>
+					</code>
+				</pre>
+			</section>
+			<section>
+				<pre data-id="code-declaration-merging">
+					<code class="hljs javascript" data-trim data-line-numbers="|5-17">
+						<script type="text/template">
+							export class NewCatService implements INewCatService {
+								private catOwnerRepository!: CatOwnerRepository;
+								private catRepository!: CatRepository;
+							
+								public async createCat(ownerId: string, catName: string, catBreed: string): Promise<NewCatServiceResult> {
+									const catOwner = await this
+										.catOwnerRepository
+										.getActiveCatOwner(ownerId);
+									if (!catOwner) {
+										return { kind: 'CatNotFound' };
+									}
+							
+									const cat = await this
+										.catRepository
+										.createCat(catName, catBreed);
+									return { kind: 'CatCreated', cat };
+								}
+							}
+						</script>
+					</code>
+				</pre>
+			</section>
+			<section>
+				<pre data-id="code-declaration-merging">
+					<code class="hljs javascript" data-trim data-line-numbers="|2-8|13-25">
+						<script type="text/template">
+							export class CatOwnerRepository implements ICatOwnerRepository {
+								public async getActiveCatOwner(ownerId: string) {
+									return await db
+										.select()
+										.from(catOwnersTable)
+										.where(and(eq(catOwnersTable.active, true), eq(catOwnersTable.id, ownerId)))
+										.limit(1)
+										.then((rows) => rows[0]);
+								}
+							}
+							
+							export class CatRepository implements ICatRepository {
+								public async createCat(name: string, breed: string) {
+									return await db
+										.insert(catsTable)
+										.values({
+											id: uuidv4(),
+											name,
+											breed,
+										})
+										.returning({
+											id: catsTable.id,
+										})
+										.then((rows) => rows[0]);
+								}
+							}
+						</script>
+					</code>
+				</pre>
+			</section>
+			<section data-auto-animate>
+				<h2>Hidden Details</h2>
+				<ul>
+					<li>Some types / generics</li>
+					<li>"Framework" code</li>
+					<li>Dependency injection</li>
+					<li>Handlers</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Hidden Details</h2>
+				<p>If you want to know more about the details, please talk to us!</p>
+			</section>
+			<section>
+				<h2>What about the new requirements?</h2>
+				<ul>
+					<li>The integrations team is working with cat shelters</li>
+					<li>They will publish new cats to an event bus</li>
+					<li>These must be stored in the DB</li>
+					<li>These the same business logic applies</li>
+				</ul>
+			</section>
+			<section>
+				<pre data-id="code-declaration-merging">
+					<code class="hljs javascript" data-trim data-line-numbers="1|4-6|8-14">
+						<script type="text/template">
+							export class NewCatEventBridgeController extends EventBridgeController {
+								private newCatService!: NewCatService;
+							
+								public validateRequest(event: EventBridgeEvent): NewCatRequest {
+									return NewCatRequestSchema.parse(event.detail);
+								}
+							
+								public async handleRequest(event: NewCatRequest) {
+									const result = await this.newCatService.createCat(event.owner.id, event.cat.name, event.cat.breed);
+							
+									if (result.kind !== 'CatCreated') {
+										throw new Error('Cat creation failed!');
+									}
+								}
+							}
+						</script>
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h2>But...</h2>
+				<h3>Where are the hexagons? 🤔</h3>
+			</section>
+			<section>
+				<img height="600px" src="./assets/hexagonal-cats.png" alt="Cats API Hexagonal Architecture Diagram">
+			</section>
+			<section data-auto-animate>
+				<h2>Common Pitfalls</h2>
+				<ul>
+					<li>Fat controllers</li>
+					<li>Repository coupling</li>
+					<li>Over-using inheritance</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Common Pitfalls</h2>
+				<ul>
+					<li>Fat controllers</li>
+					<li style="list-style: none;">
+						<ul>
+							<li>Controllers should't handle orchestration</li>
+							<li>Use of "API services"</li>
+						</ul>
+					</li>
+					<li>Repository coupling</li>
+					<li>Over-using inheritance</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Common Pitfalls</h2>
+				<ul>
+					<li>Fat controllers</li>
+					<li>Repository coupling</li>
+					<li style="list-style: none;">
+						<ul>
+							<li>Repositories shouldn't be coupled to APIs</li>
+							<li>Or have "leaky" abstractions</li>
+							<li>(e.g. DB transactions)</li>
+						</ul>
+					</li>
+					<li>Over-using inheritance</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Common Pitfalls</h2>
+				<ul>
+					<li>Fat controllers</li>
+					<li>Repository coupling</li>
+					<li>Over-using inheritance</li>
+					<li style="list-style: none;">
+						<ul>
+							<li>Diamond problem</li>
+							<li>Prefer composition over inheritance</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Summary</h2>
+				<ul>
+					<li>Separation of concerns</li>
+					<li>Modular code</li>
+					<li>Promote code reuse</li>
+					<li>Improve code readability</li>
+					<li>Improved testability</li>
+					<li>Consistency
+						<ul>
+							<li>The same everywhere</li>
+							<li>Abstract repetitive code (e.g. error handling)</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Thank You! ❤️</h2>
+			</section>
+			<section style="position: relative;">
+				<h2>Further Reading</h2>
+				<style>
+					.presentation-qr {
+						display: none;
+					}
+
+					@media screen and (min-width: 768px) {
+						ul {
+							font-size: 1.25rem;
+						}
+
+						figure.presentation-qr {
+							display: block;
+						}
+
+						figure.presentation-qr img {
+							margin: unset;
+						}
+
+						.further-reading-content {
+							display: flex;
+							justify-content: center;
+							column-gap: 2rem;
+						}
+					}
+				</style>
+				<div class="further-reading-content">
+					<ul>
+						<li>
+							Articles
+							<ul>
+								<li>
+									<a href="https://medium.com/ssense-tech/hexagonal-architecture-there-are-always-two-sides-to-every-story-bc0780ed7d9c">
+										Hexagonal Architecture, there are always two sides to every story</a>
+								</li>
+								<li>
+									<a href="https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749">
+										Ready for changes with Hexagonal Architecture - Netflix Technology Blog</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							Misc
+							<ul>
+								<li>
+									<a href="./code.html">
+										Highlighted Cat API Code</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<div>
+						<figure class="presentation-qr">
+							<img src="./assets/presentation-qr.png"
+								alt="QR code for the presentation" width="77" height="77" />
+							<figcaption style="font-size: 0.75rem; width: 100px;">
+								<span class="presentation-qr-point" style="font-size: 1.5rem;">👆</span>
+								<style>
+									.presentation-qr-point {
+										animation: bounce 4s infinite ease-in-out;
+										display: block;
+									}
+
+									@keyframes bounce {
+
+										0%,
+										80% {
+											transform: translateY(0);
+										}
+
+										85% {
+											transform: translateY(-5px);
+										}
+
+										90% {
+											transform: translateY(2.5px);
+										}
+
+										95% {
+											transform: translateY(-5px);
+										}
+
+										100% {
+											transform: translateY(0px);
+										}
+									}
+								</style>
+								Scan me to view slides!
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="/dist/reveal.js"></script>
+	<script src="/plugin/highlight/highlight.js"></script>
+	<script src="/plugin/notes/notes.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			plugins: [RevealHighlight, RevealNotes],
+		});
+	</script>
+</body>
+
+</html>

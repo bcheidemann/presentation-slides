@@ -1,0 +1,145 @@
+<html>
+<head>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Questrial);
+@import url(https://fonts.googleapis.com/css?family=Arvo);
+@font-face {
+	src: url(https://lea.verou.me/logo.otf);
+	font-family: 'LeaVerou';
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+pre[class*=language-] {
+  padding: 0 2px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+code[class*=language-], pre[class*=language-] {
+  text-shadow: none !important;
+}
+
+pre {
+  background: #191919 !important;
+}
+
+.h-err {
+  background: rgb(114, 62, 62) !important;
+}
+
+.h-deps {
+  background: rgb(62, 114, 114) !important;
+}
+
+.h-validation {
+  background: rgb(62, 114, 62) !important;
+}
+
+.h-response {
+  background: rgb(62, 62, 114) !important;
+}
+
+.h-domain {
+  background: rgb(114, 62, 114) !important;
+}
+
+.h-db {
+  background: rgb(114, 114, 62) !important;
+}
+</style>
+<link href="/prism/prism.css" rel="stylesheet" />
+</head>
+<body>
+<pre><code class="language-typescript">export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyStructuredResultV2> => {
+</code></pre>
+<pre class="h-deps"><code class="language-typescript">  const logger = new Logger();
+</code></pre>
+<pre><code class="language-typescript">
+</code></pre>
+<pre class="h-err"><code class="language-typescript">  try {
+</code></pre>
+<pre class="h-validation"><code class="language-typescript">    if (!event.body) {
+</code></pre>
+<pre class="h-response"><code class="language-typescript">      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'No body provided' }),
+      };
+</code></pre>
+<pre class="h-validation"><code class="language-typescript">    }
+</code></pre>
+<pre><code class="language-typescript">
+</code></pre>
+<pre class="h-validation"><code class="language-typescript">    let body: NewCatRequest;
+    try {
+      body = NewCatRequestSchema.parse(JSON.parse(event.body ?? ''));
+    } catch (error) {
+</code></pre>
+<pre class="h-response"><code class="language-typescript">      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Invalid body' }),
+      };
+</code></pre>
+<pre class="h-validation"><code class="language-typescript">    }
+</code></pre>
+<pre class="h-domain"><code class="language-typescript">
+</code></pre>
+<pre class="h-db"><code class="language-typescript">    const catOwner = await db
+      .select()
+      .from(catOwnersTable)
+      .where(and(eq(catOwnersTable.active, true), eq(catOwnersTable.id, body.owner.id)))
+      .limit(1)
+      .then((rows) => rows[0]);
+</code></pre>
+<pre class="h-domain"><code class="language-typescript">
+    if (!catOwner) {
+</code></pre>
+<pre class="h-response"><code class="language-typescript">      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Invalid owner' }),
+      };
+</code></pre>
+<pre class="h-domain"><code class="language-typescript">    }
+
+</code></pre>
+<pre class="h-db"><code class="language-typescript">    const cat = await db
+      .insert(catsTable)
+      .values({
+        id: uuidv4(),
+        name: body.cat.name,
+        breed: body.cat.breed,
+      })
+      .returning({
+        id: catsTable.id,
+      })
+      .then((rows) => rows[0]);
+</code></pre>
+<pre class="h-domain"><code class="language-typescript">
+</code></pre>
+<pre class="h-response"><code class="language-typescript">    return {
+      statusCode: 200,
+      body: JSON.stringify(cat),
+    };
+</code></pre>
+<pre><code class="language-typescript">
+</code></pre>
+<pre class="h-err"><code class="language-typescript">  } catch (err) {
+    logger.error('Error creating cat', { err });
+</code></pre>
+<pre class="h-response"><code class="language-typescript">    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Internal server error' }),
+    };
+</code></pre>
+<pre class="h-err"><code class="language-typescript">  }
+</code></pre>
+<pre><code class="language-typescript">};
+</code></pre>
+<script src="/prism/prism.js"></script>
+</body>
+</html>
