@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="description"
+		content="Hacking on the TypeScript Compiler: Extending the language with compiler plugins (slides) - presentation on extending the TypeScript language with compiler plugins" />
+
+	<title>Hacking on the TypeScript Compiler: Extending the language with compiler plugins</title>
+	<link rel="icon" type="image/png" href="https://www.heidemann.dev/favicon.png" />
+
+	<link rel="stylesheet" href="/dist/reset.css" />
+	<link rel="stylesheet" href="/dist/reveal.css" />
+	<link rel="stylesheet" href="/dist/theme/black.css" />
+	<link rel="stylesheet" href="/plugin/highlight/monokai.css" />
+
+	<style>
+		/* Hide scrollbars on code snippets */
+		code::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>Hacking the TypeScript Compiler</h2>
+				<h3>Extending the language with compiler plugins 🔨</h3>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li>Disclaimer ⚠️</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>Brief summary of some exploratory work I recently did on TypeScript</li>
+							<!-- Not my first rodeo with big FOSS projects (Deno contributions) - but different result and much more worth talking about -->
+							<li>What I learned from that work</li>
+							<li>Demo how to extend TypeScript with compiler plugins</li>
+						</ul>
+					</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li>Disclaimer ⚠️</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>Show the inner working of TS</li>
+							<li>Show that even complex projects are accessible to everyone</li>
+							<!-- TypeScript has self-hosted compiler - no need to learn a new language -->
+							<li>Encourage "lifting the lid"</li>
+							<li>Encourage open source involvement</li>
+						</ul>
+					</li>
+					<li>Disclaimer ⚠️</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Overview</h2>
+				<ul>
+					<li>What's the talk about? 🤔</li>
+					<li>Why am I giving this presentation? 👨🏼‍🏫</li>
+					<li>Disclaimer ⚠️</li>
+					<li style="list-style-type: none">
+						<ul>
+							<li>This presentation is quite technical</li>
+							<li>Certain foundational knowledge will be assumed</li>
+							<li>If you don't follow, ask!</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Introduction</h2>
+				<h3>Why I got involved?</h3>
+				<ul>
+					<li>Legacy decorators standardised through TC39</li>
+					<li>New decorators don't support design time type reflection</li>
+					<li>DI library I maintain unable to update</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Introduction</h2>
+				<h3>Why I got involved?</h3>
+				<ul>
+					<li style="font-size: 48px;">Why not!</li>
+					<!-- It's fun to lift the lid on these things -->
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>The investigation begins 🔎</h3>
+				<img src="/hacking-on-the-ts-compiler/assets/gh-ts-issue-57533.png" alt="GitHub issue 57533: Expose design-time type information in TC39 decorator metadata when emitDecoratorMetadata: true" />
+				<ul>
+					<li>Look for relevant GitHub issues</li>
+					<li>Found two competing proposals</li>
+					<li>One was flawed (why?)</li>
+					<li>The other had very little detail or engagement</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>The investigation begins 🔎</h3>
+				<ul>
+					<li>Time to clone the repo!</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>The investigation begins 🔎</h3>
+				<img src="/hacking-on-the-ts-compiler/assets/ts-code-getTypeMetadata-main.png" alt="The getTypeMetadata in the TypeScript codebase" />
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>The investigation begins 🔎</h3>
+				<img height="200" src="/hacking-on-the-ts-compiler/assets/ts-code-getTypeMetadata-main.png" alt="The getTypeMetadata in the TypeScript codebase" />
+				<br />
+				<ul>
+					<li>Looks like this work was planned (15 months ago)</li>
+					<li>How hard can it be?</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>Implementing a PoC 👷‍♂️</h3>
+				<img src="/hacking-on-the-ts-compiler/assets/ts-code-getTypeMetadata-diff.png" alt="Modifications to the getTypeMetadata in the TypeScript codebase" />
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>Implementing a PoC 👷‍♂️</h3>
+				<span style="font-size: 100px;">🔥</span>
+				<br />
+				Oops! Everything broke... why?
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>Implementing a PoC 👷‍♂️</h3>
+				<img src="/hacking-on-the-ts-compiler/assets/ts-code-metadataHelper-main.png" alt="The metadataHelper in the TypeScript codebase" />
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>Implementing a PoC 👷‍♂️</h3>
+				<img src="/hacking-on-the-ts-compiler/assets/ts-code-metadataHelper-poc.png" alt="Modifications to the metadataHelper in the TypeScript codebase" />
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>Implementing a PoC 👷‍♂️</h3>
+				<img src="/hacking-on-the-ts-compiler/assets/gh-ts-pr-58101.png" alt="GitHub PR 58101: PROPOSAL Add support for emitDecoratorMetadata for ES decorators" />
+				<br />
+				Success! 🥳
+			</section>
+			<section data-auto-animate>
+				<h2>Working on TSC</h2>
+				<h3>Hitting a road bump 🤕</h3>
+				<img src="/hacking-on-the-ts-compiler/assets/gh-ts-issue-57533-invariant-comment.png" alt="GitHub issue 57533: Comment: Can you give some examples of how this would work while maintaining this invariant?" />
+				<br />
+				In short... no* 😅
+				<br />
+				<small>* technically class methods and properties are declarations, but classes are "expression declarations".</small>
+			</section>
+			<section data-auto-animate>
+				<h2>A fork in the road</h2>
+				<h3>(😉)</h3>
+				<p>What are our options?</p>
+				<ul>
+					<li>Accept defeat 👎</li>
+					<li>Fork TypeScript 🥵</li>
+					<li>Create a TypeScript compiler plugin 👍</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>What are compiler plugins?</h2>
+				<ul>
+					<li>Extensions to TSC</li>
+					<li>Allow modifying diagnostics</li>
+					<li>Allow modifying source code*</li>
+					<li>Allow extending the syntax*</li>
+				</ul>
+				<pre>
+					<code class="hljs json" data-trim data-line-numbers>
+						<script type="text/template">
+							// tsconfig.json
+							{
+								"compilerOptions": {
+									"plugins": [
+										{
+											"transform": "my-ts-plugin"
+										}
+									]
+								}
+							}
+						</script>
+					</code>
+				</pre>
+				<small style="font-size: 14px;">* Transformations and syntax extensions require a patched version of TSC (see <a href="https://github.com/nonara/ts-patch" target="_blank">ts-patch</a>)</small>
+			</section>
+			<section data-auto-animate>
+				<h2>Implementing a Plugin</h2>
+				<ul>
+					<li>Simple example</li>
+					<li>Demonstration purposes only</li>
+					<li>The <a href="https://github.com/bcheidemann/typescript-plugin-emit-decorator-metadata" target="_blank">plugin for design time type reflection</a> is messy, complicated and unfinished</li>
+				</ul>
+			</section>
+			<section data-auto-animate>
+				<h2>Implementing a Plugin</h2>
+				<h3>Step 1: Define the Result</h3>
+				<pre>
+					<code class="hljs javascript" data-trim data-line-numbers>
+						<script type="text/template">
+							instrument: function add(a: number, b: number) {
+								return a + b;
+							}
+
+							add(1, 2);
+							// Logs:
+							// { ... "functionName":"add","arguments":{"a":1,"b":2}}
+						</script>
+					</code>
+				</pre>	
+			</section>
+			<section data-auto-animate>
+				<h2>Implementing a Plugin</h2>
+				<h3>Step 2: Define the Output</h3>
+				<pre>
+					<code class="hljs javascript" data-trim data-line-numbers>
+						<script type="text/template">
+							/*instrument:*/ function add(a, b) {
+								console.log(
+									JSON.stringify({
+										severity: "TRACE",
+										message: "Entering function",
+										functionName: "add",
+										arguments: { a, b },
+									}),
+								);
+								{
+									return a + b;
+								}
+							}
+						</script>
+					</code>
+				</pre>	
+			</section>
+			<section data-auto-animate>
+				<h2>Implementing a Plugin</h2>
+				<h3>Step 3: Implement the Plugin</h3>
+				<div style="display: flex; justify-content: center; align-items: center; column-gap: 20px;">
+					<figure>
+						<img width="400" style="margin: 0; margin-top: 20px;" src="/hacking-on-the-ts-compiler/assets/ts-ast-viewer-example.png" alt="TypeScript AST Viewer: AST for example input code" />
+						<figcaption style="font-size: 16px;"><a href="https://ts-ast-viewer.com/#code/JYOwzgLgTgrgtgUxBAXAAgGYxAYwsAexDQEMATMgChPRHgCMEoAaNe2hpgSjQG8AoNELRQEEGFGIk0AajYBufgF9+QA" target="_blank">TypeScript AST Viewer</a>: AST for example input code</figcaption>
+					</figure>
+					<ul>
+						<li>Remove label diagnostics</li>
+						<li>Code generation / modification
+							<ul>
+								<li>Visitor pattern</li>
+								<li>Node replacement</li>
+								<li>Factory pattern</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section data-auto-animate>
+				<h2>Implementing a Plugin</h2>
+				<h3>Step 3: Implement the Plugin</h3>
+				<pre>
+					<code class="hljs javascript" data-trim data-line-numbers="|13-17|18|31-43|19-28|70-75|77-85|87-90|94-98|112-119|99-103|104-109|121-126|131-189">
+						<script type="text/template">
+							import type * as ts from "typescript";
+							import type {
+								PluginConfig,
+								TransformerExtras,
+							} from "ts-patch";
+
+							type Context = {
+								extras: TransformerExtras;
+								tsContext: ts.TransformationContext;
+								program: ts.Program;
+							};
+
+							export default function (
+								program: ts.Program,
+								_pluginConfig: PluginConfig,
+								extras: TransformerExtras,
+							) {
+								removeUnusedLabelDiagnostic(extras);
+								return (tsContext: ts.TransformationContext) => {
+									return createNodeAndChildrenVisitor(
+										defaultVisitNode,
+										{
+											extras,
+											tsContext,
+											program,
+										},
+									);
+								};
+							}
+
+							function removeUnusedLabelDiagnostic(
+								extras: TransformerExtras,
+							) {
+								let toRemove: number[] = [];
+								extras.diagnostics.forEach((diagnostic, index) => {
+									if (diagnostic.code === 1344) {
+										toRemove.push(index);
+									}
+								});
+								toRemove.reverse().forEach((index) => {
+									extras.removeDiagnostic(index);
+								});
+							}
+
+							function createNodeAndChildrenVisitor(
+								visitor: (node: ts.Node, ctx: Context) => ts.Node,
+								ctx: Context,
+							) {
+								return (node: ts.Node) => {
+									return visitNodeAndChildren(
+										node,
+										visitor,
+										ctx,
+									);
+								};
+							}
+
+							function visitNodeAndChildren(
+								node: ts.Node,
+								visitor: (node: ts.Node, ctx: Context) => ts.Node,
+								ctx: Context,
+							): ts.Node {
+								return ctx.extras.ts.visitEachChild(
+									visitor(node, ctx),
+									(childNode) => visitNodeAndChildren(childNode, visitor, ctx),
+									ctx.tsContext,
+								);
+							}
+
+							function defaultVisitNode(node: ts.Node, ctx: Context) {
+								if (ctx.extras.ts.isLabeledStatement(node)) {
+									return labeledStatementVisitor(node, ctx);
+								}
+								return node;
+							}
+
+							function labeledStatementVisitor(
+								node: ts.LabeledStatement,
+								ctx: Context,
+							) {
+								if (ctx.extras.ts.isFunctionDeclaration(node.statement)) {
+									return labeledFunctionDeclarationVisitor(node.statement, ctx);
+								}
+								return node;
+							}
+
+							function labeledFunctionDeclarationVisitor(
+								node: ts.FunctionDeclaration,
+								ctx: Context,
+							) {
+								if (!node.body) {
+									return node;
+								}
+								const functionName = node.name?.getText();
+								const parameters = getParameterNames(
+									node.parameters,
+									ctx,
+								);
+								ctx.extras.ts.addSyntheticLeadingComment(
+									node,
+									ctx.extras.ts.SyntaxKind.MultiLineCommentTrivia,
+									"instrument:",
+								);
+								return ctx.extras.ts.visitEachChild(
+									node,
+									(childNode) =>
+										visitLabeledFunctionBody(childNode, ctx, functionName, parameters),
+									ctx.tsContext,
+								);
+							}
+
+							function getParameterNames(
+								parameters: ts.NodeArray<ts.ParameterDeclaration>,
+								ctx: Context,
+							) {
+								return parameters
+									.map((parameter) => parameter.name)
+									.filter(ctx.extras.ts.isIdentifier);
+							}
+
+							function visitLabeledFunctionBody(
+								node: ts.Node,
+								ctx: Context,
+								functionName: string | undefined,
+								parameters: ts.Identifier[],
+							) {
+								if (!ctx.extras.ts.isBlock(node)) {
+									return node;
+								}
+
+								return ctx.extras.ts.factory.createBlock([
+									ctx.extras.ts.factory.createExpressionStatement(
+										ctx.extras.ts.factory.createCallExpression(
+											ctx.extras.ts.factory.createPropertyAccessExpression(
+												ctx.extras.ts.factory.createIdentifier("console"),
+												ctx.extras.ts.factory.createIdentifier("log"),
+											),
+											undefined,
+											[
+												ctx.extras.ts.factory.createCallExpression(
+													ctx.extras.ts.factory.createPropertyAccessExpression(
+														ctx.extras.ts.factory.createIdentifier("JSON"),
+														ctx.extras.ts.factory.createIdentifier("stringify"),
+													),
+													undefined,
+													[
+														ctx.extras.ts.factory.createObjectLiteralExpression(
+															[
+																ctx.extras.ts.factory.createPropertyAssignment(
+																	ctx.extras.ts.factory.createIdentifier("severity"),
+																	ctx.extras.ts.factory.createStringLiteral(
+																		"TRACE",
+																	),
+																),
+																ctx.extras.ts.factory.createPropertyAssignment(
+																	ctx.extras.ts.factory.createIdentifier("message"),
+																	ctx.extras.ts.factory.createStringLiteral(
+																		"Entering function",
+																	),
+																),
+																ctx.extras.ts.factory.createPropertyAssignment(
+																	ctx.extras.ts.factory.createIdentifier("functionName"),
+																	functionName
+																		? ctx.extras.ts.factory.createStringLiteral(functionName)
+																		: ctx.extras.ts.factory.createNull(),
+																),
+																ctx.extras.ts.factory.createPropertyAssignment(
+																	ctx.extras.ts.factory.createIdentifier("arguments"),
+																	ctx.extras.ts.factory.createObjectLiteralExpression(
+																		parameters.map(
+																			(identifier) =>
+																				ctx.extras.ts.factory
+																					.createShorthandPropertyAssignment(identifier),
+																		),
+																	),
+																),
+															],
+														),
+													],
+												),
+											],
+										),
+									),
+									node,
+								]);
+							}
+						</script>
+					</code>
+				</pre>	
+			</section>
+			<section data-auto-animate>
+				<h2>Done! 🥳</h2>
+				<!-- Note that this is more or less how TS performs transformations internally -->
+				<!-- If you can do this, you can do a lot on TSC -->
+			</section>
+			<section data-auto-animate>
+				<h2>A Word of caution ⚠️</h2>
+				<ul>
+					<li>ts-patch is a third party tool</li>
+					<li>It is only compatible with TSC</li>
+					<li>No SWC, no ESBuild, no type strippers</li>
+					<li>API is relatively stable - but sometime TS internals are needed</li>
+					<li>More for fun/experimentation than for production code</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Thank You! ❤️</h2>
+			</section>
+			<section style="position: relative;">
+				<h2>Further Reading</h2>
+				<style>
+					.presentation-qr {
+						display: none;
+					}
+
+					@media screen and (min-width: 768px) {
+						ul {
+							font-size: 1.25rem;
+						}
+
+						figure.presentation-qr {
+							display: block;
+						}
+
+						figure.presentation-qr img {
+							margin: unset;
+						}
+
+						.further-reading-content {
+							display: flex;
+							justify-content: center;
+							column-gap: 2rem;
+						}
+					}
+				</style>
+				<div class="further-reading-content">
+					<ul>
+						<li>
+							Further Reading
+							<ul>
+								<li>
+									<a href="https://github.com/microsoft/TypeScript/issues/57533">
+										Expose design-time type information in TC39 decorator metadata when emitDecoratorMetadata: true #57533</a>
+								</li>
+								<li>
+									<a href="https://github.com/microsoft/TypeScript/pull/58101">
+										PROPOSAL Add support for emitDecoratorMetadata for ES decorators #58101</a>
+								</li>
+								<li>
+									<a href="https://github.com/bcheidemann/typescript-plugin-emit-decorator-metadata">
+										TypeScript Plugin - Emit Decorator Metadata</a>
+								</li>
+								<li>
+									<a href="https://github.com/bcheidemann/typescript-tracing-compiler-plugin">
+										TypeScript Tracing Compiler Plugin</a> (the plugin from this presentation)
+								</li>
+							</ul>
+						</li>
+						<li>
+							Tools
+							<ul>
+								<li>
+									<a href="https://github.com/nonara/ts-patch">ts-patch</a>
+									<a href="https://ts-ast-viewer.com/">TypeScript AST Viewer</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<div>
+						<figure class="presentation-qr">
+							<img src="/hacking-on-the-ts-compiler/assets/presentation-qr.png"
+								alt="QR code for the presentation" width="77" height="77" />
+							<figcaption style="font-size: 0.75rem; width: 100px;">
+								<span class="presentation-qr-point" style="font-size: 1.5rem;">👆</span>
+								<style>
+									.presentation-qr-point {
+										animation: bounce 4s infinite ease-in-out;
+										display: block;
+									}
+
+									@keyframes bounce {
+
+										0%,
+										80% {
+											transform: translateY(0);
+										}
+
+										85% {
+											transform: translateY(-5px);
+										}
+
+										90% {
+											transform: translateY(2.5px);
+										}
+
+										95% {
+											transform: translateY(-5px);
+										}
+
+										100% {
+											transform: translateY(0px);
+										}
+									}
+								</style>
+								Scan me to view slides!
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="/dist/reveal.js"></script>
+	<script src="/plugin/highlight/highlight.js"></script>
+	<script src="/plugin/notes/notes.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			plugins: [RevealHighlight, RevealNotes],
+		});
+	</script>
+</body>
+
+</html>
